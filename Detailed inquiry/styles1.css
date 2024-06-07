@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.post-detail {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.action-button {
+    margin: 10px 5px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.like-button {
+    background-color: #28a745;
+    margin-right: 5px;
+}
+
+.like-section, .comment-actions {
+    display: flex;
+    align-items: center;
+}
+
+.comments-section {
+    margin-top: 20px;
+}
+
+.comment {
+    border-top: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.comment-content {
+    margin: 0;
+}
+
+.comment-actions {
+    margin-top: 5px;
+}

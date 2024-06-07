@@ -49,13 +49,13 @@ document.getElementById('signup-form').addEventListener('submit', function(event
     document.getElementById('signup-form').reset();
 });
 
-function togglePasswordVisibility(fieldId, toggleIcon) {
-    const field = document.getElementById(fieldId);
-    if (field.type === 'password') {
-        field.type = 'text';
-        toggleIcon.textContent = '🙈';
-    } else {
-        field.type = 'password';
-        toggleIcon.textContent = '👁️';
-    }
-}
+// function togglePasswordVisibility(fieldId, toggleIcon) {
+//     const field = document.getElementById(fieldId);
+//     if (field.type === 'password') {
+//         field.type = 'text';
+//         toggleIcon.textContent = '🙈';
+//     } else {
+//         field.type = 'password';
+//         toggleIcon.textContent = '👁️';
+//     }
+// }

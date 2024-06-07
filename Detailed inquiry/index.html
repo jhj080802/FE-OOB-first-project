@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세 조회</title>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+    <div class="post-detail">
+        <h1 id="post-title">게시글 제목</h1>
+        <p id="post-content">여기에 게시글의 전체 내용이 표시됩니다.</p>
+        <p id="post-views">조회수: <span>123</span></p>
+        <button id="edit-button" class="action-button" style="display: none;">수정</button>
+        <button id="delete-button" class="action-button" style="display: none;">삭제</button>
+        <div class="like-section">
+            <button id="post-like-button" class="like-button">게시물 좋아요</button>
+            <span id="post-like-count">10</span>
+        </div>
+        <div class="comments-section">
+            <h2>댓글</h2>
+            <div class="comment">
+                <p class="comment-content">이것은 댓글입니다.</p>
+                <div class="comment-actions">
+                    <button class="reply-like-button like-button">댓글 좋아요</button>
+                    <span class="comment-like-count">5</span>
+                </div>
+            </div>
+            <!-- More comments here -->
+        </div>
+    </div>
+    <script src="script1.js"></script>
+</body>
+</html>
