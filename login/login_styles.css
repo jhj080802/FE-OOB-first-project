@@ -38,15 +38,18 @@ body {
 }
 
 .password-container input {
-    width: calc(100% - 40px);
+    width: calc(100% - 50px);
+    padding-right: 40px;
 }
 
 .eye {
     position: absolute;
     right: 10px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-85%);
     cursor: pointer;
+    font-size: 20px;
+    color: #999;
 }
 
 button {
