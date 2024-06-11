@@ -1,0 +1,216 @@
+/* Detailed inquiry.css 파일 내용 */
+:root {
+    --title-color: #ffffff;
+    --body-bg-color: #ffffff;
+    --main-bg-color: #f4f4f4;
+    --header-bg-color: #ffffff;
+    --header-text-color: #333;
+    --box-bg-color: #ffffff;
+    --box-border-color: #EFF0F2;
+    --button-bg-color: #8f9094;
+    --button-hover-bg-color: #555;
+    --button-text-color: #ffffff;
+    --button-home: #ffffff;
+    --button-home-font-color: #B4B5B7;
+    --button-detail-color : #ffffff;
+    --input-border-color: #ddd;
+    --input-error-border-color: red;
+    --input-error-placeholder-color: red;
+    --heart-bg-color: #ffffff;
+    --heart-bg-text-color: #000000;
+    --heart-active-bg-color: #3269f6;
+    --heart-active-text-color: #ffffff;
+    --views-font-color :#B4B5B7;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--body-bg-color);
+}
+
+p{
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 27px;
+}
+
+hr {
+    border-color: #EFF0F2;
+}
+
+#home{
+    background-color: var(--button-home);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    bottom: 25px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    background-color: var(--title-color);
+    border: none;
+    cursor: pointer;
+}
+
+.BodySmall {
+    color: var(--black, #000);
+    background-color: #ffffff;
+    border: none;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    cursor: pointer;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 380px;
+    background-color: var(--header-bg-color);
+    margin-bottom: 1rem;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.content-box {
+    width: 760px;
+    padding: 40px;
+    background-color: var(--box-bg-color);
+}
+
+.page-title {
+    text-align: left;
+    font-size: 32px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+#details{
+    background-color: var(--button-detail-color);
+    border: none;
+    font-size: x-large;
+    font-weight: 600;
+    position: relative;
+    bottom: 30px;
+    cursor: pointer;
+}
+
+#bodyTop{
+    display: flex;
+    justify-content: space-between;
+}
+
+.article {
+    margin-bottom: 40px;
+}
+
+.interaction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.views {
+    font-size: 16px;
+    color: var(--views-font-color);
+}
+
+.heart {
+    padding: 12px 32px;
+    border-radius: 12px;
+    background: var(--heart-bg-color);
+    border: 1px solid var(--box-border-color);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.heart.active {
+    background-color: var(--heart-active-bg-color);
+    color: var(--heart-active-text-color);
+}
+
+#comments {
+    background: var(--box-bg-color);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#comments h2 {
+    margin-top: 0;
+}
+
+circle{
+    cursor: pointer;
+}
+
+.comment {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-button-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#comment-text {
+    flex: 1;
+    padding: 12px;
+    padding-right: 40px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    resize: none;
+    box-sizing: border-box; 
+    overflow: hidden; 
+    min-height: 40px; 
+}
+
+.comment-button {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 5px;
+}
+
+.comment-button svg {
+    width: 36px;
+    height: 36px;
+}
+
+.userName {
+    position: relative;
+    bottom: 5px;
+}
+
+.excess {
+    color: var(--input-error-placeholder-color, red);
+}
