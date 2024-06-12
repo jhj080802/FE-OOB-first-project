@@ -5,17 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>커뮤니티는 공동의 관심사 목표 가치</title>
     <link rel="stylesheet" href="Detailed inquiry.css">
-    <style>
-        .excess {
-            color: var(--input-error-placeholder-color, red);
-        }
-        .char-count {
-            font-size: 12px;
-            color: var(--input-error-placeholder-color, red);
-            text-align: right;
-            margin-top: 5px;
-        }
-    </style>
 </head>
 <body>
     <header class="header">
@@ -64,14 +53,16 @@
                 <form id="comment-form" class="comment-form">
                     <div class="input-button-container">
                         <textarea id="comment-text" placeholder="댓글은 최대 100자 까지 적을 수 있어요"></textarea>
-                        <button type="submit" class="comment-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
-                                <circle cx="18" cy="18" r="14.5" stroke="#3269F6"/>
-                                <path d="M24.0021 25.4936C24.7151 25.4926 25.198 24.767 24.9237 24.1089L18.923 9.71418C18.5811 8.89387 17.4189 8.89387 17.077 9.71417L11.0763 24.1089C10.802 24.767 11.2849 25.4926 11.9979 25.4936L15.4533 25.4987C15.9564 25.4994 16.3818 25.1262 16.4465 24.6273L17.5041 16.468C17.5795 15.887 18.4205 15.887 18.4959 16.468L19.5535 24.6273C19.6182 25.1262 20.0436 25.4994 20.5467 25.4987L24.0021 25.4936Z" fill="#3269F6"/>
-                            </svg>
-                        </button>
+                        <div class="comment-interface">
+                            <button type="submit" class="comment-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                                    <circle cx="18" cy="18" r="14.5" stroke="#3269F6"/>
+                                    <path d="M24.0021 25.4936C24.7151 25.4926 25.198 24.767 24.9237 24.1089L18.923 9.71418C18.5811 8.89387 17.4189 8.89387 17.077 9.71417L11.0763 24.1089C10.802 24.767 11.2849 25.4926 11.9979 25.4936L15.4533 25.4987C15.9564 25.4994 16.3818 25.1262 16.4465 24.6273L17.5041 16.468C17.5795 15.887 18.4205 15.887 18.4959 16.468L19.5535 24.6273C19.6182 25.1262 20.0436 25.4994 20.5467 25.4987L24.0021 25.4936Z" fill="#3269F6"/>
+                                </svg>
+                            </button>
+                            <span id="char-count" class="char-count">100</span>
+                        </div>
                     </div>
-                    <div id="char-count" class="char-count">100 characters remaining</div>
                 </form>
             </section>
         </div>
