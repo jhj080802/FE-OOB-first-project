@@ -7,14 +7,24 @@ document.getElementById('comment-form').addEventListener('submit', function(even
         const commentList = document.getElementById('comment-list');
         const newComment = document.createElement('div');
         newComment.classList.add('comment');
-        newComment.innerHTML = `<p>${commentText}</p>`;
+        newComment.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="12" fill="black"/>
+            </svg>
+            <span class="userName">나</span>
+            <p>${commentText}</p>`;
         commentList.appendChild(newComment);
+
         document.getElementById('comment-text').value = "";
+
         const textarea = document.getElementById('comment-text');
         textarea.style.height = "50px";
+        const charCount = document.getElementById('char-count');
+        charCount.style.display = 'none';
+
+        
     }
 });
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const textarea = document.getElementById('comment-text');
