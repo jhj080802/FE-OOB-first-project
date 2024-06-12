@@ -9,11 +9,12 @@ document.getElementById('comment-form').addEventListener('submit', function(even
         newComment.classList.add('comment');
         newComment.innerHTML = `<p>${commentText}</p>`;
         commentList.appendChild(newComment);
-
         document.getElementById('comment-text').value = "";
-        
+        const textarea = document.getElementById('comment-text');
+        textarea.style.height = "50px";
     }
 });
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const textarea = document.getElementById('comment-text');
