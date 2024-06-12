@@ -1,8 +1,9 @@
 document.getElementById('comment-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const commentText = document.getElementById('comment-text').value;
+    let commentText = document.getElementById('comment-text').value;
     if (commentText.trim() !== "") {
+        commentText = commentText.replaceAll("\n","<br>");
         const commentList = document.getElementById('comment-list');
         const newComment = document.createElement('div');
         newComment.classList.add('comment');
@@ -10,7 +11,7 @@ document.getElementById('comment-form').addEventListener('submit', function(even
         commentList.appendChild(newComment);
 
         document.getElementById('comment-text').value = "";
-        updateCharCount(); // Clear the char count after submitting
+        
     }
 });
 
