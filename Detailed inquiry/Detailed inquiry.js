@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const initialHeight = textarea.clientHeight; // Store the initial height of the textarea
 
     function autoResize() {
-        textarea.style.height = 'auto'; // Temporarily reduce the height
+        textarea.style.height = "50px"; // Temporarily reduce the height
         textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to scrollHeight
     }
 
@@ -53,20 +53,28 @@ document.addEventListener('DOMContentLoaded', function () {
     updateCharCount();
 });
 
-document.getElementById('comment-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", function() {
+    const commentText = document.getElementById("comment-text");
+    const charCount = document.getElementById("char-count");
+    const maxChars = 100;
+    const initialHeight = commentText.clientHeight;
 
-    const commentText = document.getElementById('comment-text').value;
-    if (commentText.trim() !== "") {
-        const commentList = document.getElementById('comment-list');
-        const newComment = document.createElement('div');
-        newComment.classList.add('comment');
-        newComment.innerHTML = `<p>${commentText}</p>`;
-        commentList.appendChild(newComment);
+    commentText.addEventListener("input", function() {
+        const textLength = commentText.value.length;
+        charCount.textContent = maxChars - textLength;
 
-        document.getElementById('comment-text').value = "";
-        updateCharCount(); // Clear the char count after submitting
-    }
+        if (textLength > maxChars) {
+            commentText.classList.add("excess");
+        } else {
+            commentText.classList.remove("excess");
+        }
+
+        if (commentText.scrollHeight > initialHeight) {
+            charCount.style.display = "block";
+        } else {
+            charCount.style.display = "none";
+        }
+    });
 });
 
 let heartClicked = false;
