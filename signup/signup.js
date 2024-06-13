@@ -20,7 +20,6 @@ document.getElementById('registrationForm').addEventListener('input', function()
         usernameError.textContent = '';
     }
 
-        // 아래와 같이 수정
     if (!isPasswordValid) {
         document.getElementById('password').classList.add('error');
         passwordError.textContent = '비밀번호는 영문, 숫자, 특수문자 중 2개 이상 포함하여 8글자 이상이어야 합니다.';
@@ -39,7 +38,6 @@ document.getElementById('registrationForm').addEventListener('input', function()
         confirmPasswordError.textContent = '';
     }
 
-
     if (isUsernameValid && isPasswordValid && doPasswordsMatch) {
         submitBtn.classList.add('active');
         submitBtn.disabled = false;
@@ -51,5 +49,28 @@ document.getElementById('registrationForm').addEventListener('input', function()
 
 document.getElementById('registrationForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    alert('회원가입 완료');
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    fetch('https://example.com/api/register', { // 여기에 실제 API 엔드포인트를 입력하세요.
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('회원가입 완료');
+            window.location.href = 'index.html'; // 회원가입이 완료되면 홈 페이지로 이동합니다.
+        } else {
+            alert('회원가입 실패: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('회원가입 중 오류가 발생했습니다.');
+    });
 });
