@@ -43,10 +43,13 @@ p {
 }
 
 hr {
-    border-color: #EFF0F2;
+    border: 0;
+    height: 1px;
+    background: #EFF0F2;
 }
 
-#home {
+
+#prvBtn {
     background-color: var(--button-home);
     border: none;
     cursor: pointer;
@@ -60,6 +63,8 @@ hr {
     background-color: var(--title-color);
     border: none;
     cursor: pointer;
+    color: #000;
+    text-decoration: none;
 }
 
 .BodySmall {
@@ -238,8 +243,47 @@ circle {
     font-size: 12px;
     text-align: center;
     margin-top: 5px;
-    display: block; /* 남은 글자 수를 항상 보이도록 설정 */
+    display: block;
     padding-bottom: px;
     margin-top: 0%;
     color: blue;
 }
+#details {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    z-index: 1;
+    flex-direction: column;  /* 세로 배치 */
+    transform: translateY(50%);
+}
+
+.dropdown-content button {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    cursor: pointer;
+    padding: 10px 10px;
+    text-align: left;
+    width: 100%;
+    background: #9a9b9f ;
+
+}
+.dropdown-content button:first-child {
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+}.dropdown-content button:last-child {
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+}
+
+.dropdown-content button:hover {
+    background-color: var(--button-hover-bg-color);
+}
+

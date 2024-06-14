@@ -1,51 +1,58 @@
-function fetchData() {
-    fetch('https://api.example.com/profile')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('네트워크 응답이 실패했습니다');
-            }
-            return response.json(); // JSON 응답일 경우; 텍스트 응답은 .text()를 사용합니다
-        })
-        .then(data => {
-            // 받은 JSON 데이터 처리
-            console.log(data); // 데이터 처리 로직을 여기에 넣으세요
-        })
-        .catch(error => {
-            console.error('데이터 가져오기 오류:', error);
-        });
-}
+document.addEventListener("DOMContentLoaded", function() {
+    const detailsButton = document.getElementById("details");
+    const dropdown = document.createElement("div");
+    dropdown.className = "dropdown-content";
+    dropdown.innerHTML = `
+        <button id="editBtn">수정</button>
+        <button id="deleteBtn">삭제</button>
+    `;
+    detailsButton.parentNode.insertBefore(dropdown, detailsButton.nextSibling);
 
-document.querySelector('.title').addEventListener('click', function() {
-    window.location = '/'; // 홈 페이지 URL
+    const editButton = document.getElementById("editBtn");
+    const deleteButton = document.getElementById("deleteBtn");
+    const pageTitle = document.querySelector(".page-title");
+    const article = document.querySelector(".article");
+
+    detailsButton.addEventListener("click", function() {
+        const rect = detailsButton.getBoundingClientRect();
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        dropdown.style.left = `${rect.right + window.scrollX}px`;
+        dropdown.style.top = `${rect.top + window.scrollY}px`;
+    });
+
+    editButton.addEventListener("click", function() {
+        const isEditing = pageTitle.contentEditable === "true";
+
+        if (isEditing) {
+            pageTitle.contentEditable = "false";
+            article.contentEditable = "false";
+            editButton.textContent = "수정";
+        } else {
+            pageTitle.contentEditable = "true";
+            article.contentEditable = "true";
+            editButton.textContent = "저장";
+        }
+        dropdown.style.display = "none";
+    });
+
+    deleteButton.addEventListener("click", function() {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            // 삭제 로직을 추가하세요.
+            alert("게시물이 삭제되었습니다.");
+        }
+        dropdown.style.display = "none";
+    });
+
+    document.addEventListener("click", function(event) {
+        if (!event.target.closest("#details") && !event.target.closest(".dropdown-content")) {
+            dropdown.style.display = "none";
+        }
+    });
 });
 
-document.querySelector('#writing').addEventListener('click', function() {
-    window.location = '/writing'; // 글 작성 페이지 URL
-});
 
-document.querySelector('#myProfile').addEventListener('click', function(event) {
-    event.preventDefault();
-    fetch('https://api.example.com/profile') // 프로필 데이터 가져오는 URL
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('네트워크 응답이 실패했습니다');
-            }
-            return response.json(); // 프로필 데이터가 JSON으로 반환될 경우
-        })
-        .then(profileData => {
-            // 프로필 데이터 처리 및 프로필 페이지로 이동
-            console.log(profileData); // 데이터 처리 로직을 여기에 넣으세요
-            // 예시: 데이터를 가져온 후 프로필 페이지로 이동
-            window.location = '/profile'; // 프로필 페이지 URL
-        })
-        .catch(error => {
-            console.error('프로필 데이터 가져오기 오류:', error);
-        });
-});
 
-// title 누르면 home페이지로 이동 
-// writing 누르면 글작성 페이지로 이동
-// myProfile 누르면 마이페이지로 이동
+
 
 document.getElementById('comment-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -60,7 +67,7 @@ document.getElementById('comment-form').addEventListener('submit', function(even
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="12" fill="black"/>
             </svg>
-            <span class="userName">나</span>
+            <span class="userName">MY</span>
             <p>${commentText}</p>`;
         commentList.appendChild(newComment);
 
@@ -70,8 +77,6 @@ document.getElementById('comment-form').addEventListener('submit', function(even
         textarea.style.height = "50px";
         const charCount = document.getElementById('char-count');
         charCount.style.display = 'none';
-
-        
     }
 });
 
@@ -150,4 +155,11 @@ document.getElementById('heart-button').addEventListener('click', function() {
         this.classList.remove('active');
     }
     heartClicked = !heartClicked;
+});
+
+// 이전화면으로 이동
+const previous = document.querySelector("#prvBtm");
+
+previous.addEventListener('click', function(){
+    history.back();
 });
