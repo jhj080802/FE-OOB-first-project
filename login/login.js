@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const username = usernameInput.value;
         const password = passwordInput.value;
 
-        if (username.length >= 2 && password.length >= 8) {
+        if (username.length >= 2 && username.length <= 15 && password.length >= 8) {
             loginButton.classList.add('active');
             loginButton.removeAttribute('disabled');
         } else {
@@ -20,46 +20,36 @@ document.addEventListener('DOMContentLoaded', function() {
     usernameInput.addEventListener('input', updateButtonState);
     passwordInput.addEventListener('input', updateButtonState);
 
-    loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        if (loginButton.classList.contains('active')) {
-            const username = usernameInput.value;
-            const password = passwordInput.value;
-
-            // Fetch API를 사용하여 로그인 요청을 보냅니다.
-            fetch('https://example.com/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password
-                })
-            })
-            .then(response => {
+    loginForm.addEventListener("submit", (event) => {
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+    
+        const loginData = {
+            username: usernameInput,
+            password: passwordInput,
+        };
+    
+        const loginUrl = "https://localhost:8080/api/login";
+    
+        fetch(loginUrl, {
+            method: "POST", // POST 방식으로 요청
+            headers: {
+                "Content-Type": "application/json", // JSON 형식으로 데이터 전송
+            },
+            body: JSON.stringify(loginData), // 데이터를 JSON 문자열로 변환하여 전송
+        })
+            .then((response) => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error("Network response was not ok");
                 }
-                return response.json();
+                return response.json(); // JSON 형식으로 파싱된 응답 반환
             })
-            .then(data => {
-                if (data.success) {
-                    alert('로그인 성공');
-                    // 홈 페이지로 이동합니다.
-                    window.location.href = 'home.html';
-                    // window.location.href = 'home.html';
-                } else {
-                    alert('로그인 실패: ' + data.message);
-                }
+            .then((data) => {
+                console.log("로그인 성공:", data); 
             })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-                alert('로그인 중 오류가 발생했습니다.');
+            .catch((error) => {
+                console.error("로그인 에러:", error); 
             });
-        } else {
-            alert('아이디와 비밀번호를 6자 이상 입력해주세요');
-        }
+            event.preventDefault();
     });
 });
