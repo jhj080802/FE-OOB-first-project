@@ -1,41 +1,71 @@
 document.getElementById('registrationForm').addEventListener('input', function() {
+    const nickname = document.getElementById('nickname').value;
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
     const submitBtn = document.getElementById('submitBtn');
 
+    const nicknameError = document.getElementById('nicknameError');
     const usernameError = document.getElementById('usernameError');
     const passwordError = document.getElementById('passwordError');
     const confirmPasswordError = document.getElementById('confirmPasswordError');
 
-    const isUsernameValid = /^[a-zA-Z0-9]+$/.test(username);
-    const isPasswordValid = /^(?=.*[A-Za-z])(?=.*\d|(?=.*[@$!%*?&]))(?=.*[@$!%*?&]|\d)[A-Za-z\d@$!%*?&]{8,}$/.test(password);
-    const doPasswordsMatch = password === confirmPassword;
+    const isNicknameValid = /^[a-zA-Z0-9]+$/.test(nickname) && nickname.length >= 2 && nickname.length <= 15;
+    const isUsernameValid = /^[a-zA-Z0-9]+$/.test(username) && username.length >= 2 && username.length <= 15;
     
+    const hasLetter = /[A-Za-z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    const hasSpecialChar = /[@$!%*?&]/.test(password);
+    const isPasswordValid = password.length >= 8 && (
+        (hasLetter && hasDigit) || 
+        (hasLetter && hasSpecialChar) || 
+        (hasDigit && hasSpecialChar)
+    );
+    
+    const doPasswordsMatch = password === confirmPassword;
+
+    if (!isNicknameValid) {
+        document.getElementById('nickname').classList.add('error');
+        nicknameError.textContent = '닉네임는 영문, 숫자만 사용하여 2글자 이상 15글자 이하여야합니다.';
+        document.querySelector('label[for="nickname"]').classList.add('error');
+
+    } else {
+        document.getElementById('nickname').classList.remove('error');
+        nicknameError.textContent = '';
+        document.querySelector('label[for="nickname"]').classList.remove('error');
+    }
+
     if (!isUsernameValid) {
         document.getElementById('username').classList.add('error');
-        usernameError.textContent = '아이디는 영문, 숫자만 사용할 수 있습니다.';
+        usernameError.textContent = '아이디는 영문, 숫자만 사용하여 2글자 이상 15글자 이하여야합니다.';
+        document.querySelector('label[for="username"]').classList.add('error');
+
     } else {
         document.getElementById('username').classList.remove('error');
         usernameError.textContent = '';
+        document.querySelector('label[for="username"]').classList.remove('error');
     }
 
     if (!isPasswordValid) {
         document.getElementById('password').classList.add('error');
         passwordError.textContent = '비밀번호는 영문, 숫자, 특수문자 중 2개 이상 포함하여 8글자 이상이어야 합니다.';
-        document.getElementById('confirmPassword').classList.add('error'); // 비밀번호 재입력란도 에러 클래스 추가
+        document.getElementById('confirmPassword').classList.add('error');
+        document.querySelector('label[for="password"]').classList.add('error');
     } else {
         document.getElementById('password').classList.remove('error');
         passwordError.textContent = '';
-        document.getElementById('confirmPassword').classList.remove('error'); // 비밀번호 재입력란 에러 클래스 제거
+        document.getElementById('confirmPassword').classList.remove('error');
+        document.querySelector('label[for="password"]').classList.remove('error');
     }
 
     if (!doPasswordsMatch) {
         document.getElementById('confirmPassword').classList.add('error');
         confirmPasswordError.textContent = '비밀번호가 일치하지 않습니다.';
+        document.querySelector('label[for="confirmPassword"]').classList.add('error');
     } else {
         document.getElementById('confirmPassword').classList.remove('error');
         confirmPasswordError.textContent = '';
+        document.querySelector('label[for="confirmPassword"]').classList.remove('error');
     }
 
     if (isUsernameValid && isPasswordValid && doPasswordsMatch) {
@@ -47,30 +77,42 @@ document.getElementById('registrationForm').addEventListener('input', function()
     }
 });
 
-document.getElementById('registrationForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
+document.getElementById("registrationForm").addEventListener("submit", function (event) {
     const username = document.getElementById('username').value;
+    const nickname = document.getElementById('nickname').value;
     const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
 
-    fetch('https://example.com/api/register', { // 여기에 실제 API 엔드포인트를 입력하세요.
-        method: 'POST',
+    if(password !== confirmPassword) return;
+
+    const userData = {
+        name: username,
+        nickname: nickname,
+        password: password
+    };
+
+    const signupUrl = "https://localhost:8080/api/signup";
+
+    fetch(signupUrl, {
+        method: "POST", // POST 방식으로 요청
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json", // JSON 형식으로 데이터 전송
         },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify(userData), // 데이터를 JSON 문자열로 변환하여 전송
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('회원가입 완료');
-            window.location.href = 'index.html'; // 회원가입이 완료되면 홈 페이지로 이동합니다.
-        } else {
-            alert('회원가입 실패: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('회원가입 중 오류가 발생했습니다.');
-    });
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json(); // JSON 형식으로 파싱된 응답 반환
+        })
+        .then((data) => {
+            console.log("회원가입 성공:", data); // 서버에서 반환한 데이터 출력 (예: 성공 메시지 등)
+        })
+        .catch((error) => {
+            console.error("회원가입 에러:", error); // 에러 발생 시 에러 메시지 출력
+        });
+
+    event.preventDefault();
+    alert("회원가입 완료");
 });
