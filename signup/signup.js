@@ -5,6 +5,20 @@ document.getElementById('registrationForm').addEventListener('input', function()
     const confirmPassword = document.getElementById('confirmPassword').value;
     const submitBtn = document.getElementById('submitBtn');
 
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+
+    const togglePasswordButton = document.getElementById('togglePassword');
+    const toggleConfirmPasswordButton = document.getElementById('toggleConfirmPassword');
+
+    const showPasswordIcon = document.getElementById('showPassword');
+    const showConfirmPasswordIcon = document.getElementById('showConfirmPassword');
+
+    const hidePasswordIcon = document.getElementById('hidePassword');
+    const hideConfirmPasswordIcon = document.getElementById('hideConfirmPassword');
+
+
     const nicknameError = document.getElementById('nicknameError');
     const usernameError = document.getElementById('usernameError');
     const passwordError = document.getElementById('passwordError');
@@ -75,20 +89,53 @@ document.getElementById('registrationForm').addEventListener('input', function()
         submitBtn.classList.remove('active');
         submitBtn.disabled = true;
     }
+
+    usernameInput.addEventListener('input', updateButtonState);
+    passwordInput.addEventListener('input', updateButtonState);
+    confirmPasswordInput.addEventListener('input', updateButtonState);
+    
+    togglePasswordButton.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        if (type === 'text') {
+            showPasswordIcon.style.display = 'inline';
+            hidePasswordIcon.style.display = 'none';
+        } else {
+            showPasswordIcon.style.display = 'none';
+            hidePasswordIcon.style.display = 'inline';
+        }
+    });
+
+    toggleConfirmPasswordButton.addEventListener('click', () => {
+        const type = confirmPasswordInput.getAttribute('type') === 'confirmPassword' ? 'text' : 'confirmPassword';
+        confirmPasswordInput.setAttribute('type', type);
+
+        if (type === 'text') {
+            showConfirmPasswordIcon.style.display = 'inline';
+            hideConfirmPasswordIcon.style.display = 'none';
+        } else {
+            showConfirmPasswordIcon.style.display = 'none';
+            hideConfirmPasswordIcon.style.display = 'inline';
+        }
+    });
 });
 
 document.getElementById("registrationForm").addEventListener("submit", function (event) {
-    const username = document.getElementById('username').value;
-    const nickname = document.getElementById('nickname').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-
+    // const username = document.getElementById('username').value;
+    // const nickname = document.getElementById('nickname').value;
+    // const password = document.getElementById('password').value;
+    // const confirmPassword = document.getElementById('confirmPassword').value;
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const nicknameInput = document.getElementById('nickname');
+    
     if(password !== confirmPassword) return;
 
     const userData = {
-        name: username,
-        nickname: nickname,
-        password: password
+        name: usernameInput.value,
+        nickname: nicknameInput.value,
+        password: passwordInput.value
     };
 
     const signupUrl = "https://localhost:8080/api/signup";
@@ -116,3 +163,4 @@ document.getElementById("registrationForm").addEventListener("submit", function 
     event.preventDefault();
     alert("회원가입 완료");
 });
+
