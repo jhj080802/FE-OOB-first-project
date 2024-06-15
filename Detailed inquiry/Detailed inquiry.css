@@ -117,8 +117,12 @@ hr {
 .page-title {
     text-align: left;
     font-size: 32px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-weight: 600;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
 }
 
 #details {
@@ -138,6 +142,7 @@ hr {
 
 .article {
     margin-bottom: 40px;
+    border-radius: 5px;
 }
 
 .interaction {
@@ -276,14 +281,20 @@ circle {
 
 }
 .dropdown-content button:first-child {
-    border-top-left-radius: 10%;
-    border-top-right-radius: 10%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }.dropdown-content button:last-child {
-    border-bottom-left-radius: 10%;
-    border-bottom-right-radius: 10%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .dropdown-content button:hover {
     background-color: var(--button-hover-bg-color);
 }
+
+.page-title[contentEditable="true"], .article[contentEditable="true"]{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
 

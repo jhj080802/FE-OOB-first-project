@@ -35,6 +35,20 @@ document.addEventListener("DOMContentLoaded", function() {
         dropdown.style.display = "none";
     });
 
+    pageTitle.addEventListener('input',()=>{
+        if(pageTitle.textContent.length > 15){
+            pageTitle.textContent = pageTitle.textContent.substring(0,15);
+            placeCaretAtEnd(pageTitle);
+        }
+    });
+
+    article.addEventListener('input',()=>{
+        if(article.textContent.length > 500){
+            article.textContent = article.textContent.substring(0,500);
+            placeCaretAtEnd(article);
+        }
+    });
+
     deleteButton.addEventListener("click", function() {
         if (confirm("정말로 삭제하시겠습니까?")) {
             // 삭제 로직을 추가하세요.
@@ -49,10 +63,23 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-
-
-
-
+function placeCaretAtEnd(el) {
+    el.focus();
+    if (typeof window.getSelection != "undefined"
+        && typeof document.createRange != "undefined") {
+        let range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        let sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    } else if (typeof document.body.createTextRange != "undefined") {
+        let textRange = document.body.createTextRange();
+        textRange.moveToElementText(el);
+        textRange.collapse(false);
+        textRange.select();
+    }
+}
 
 document.getElementById('comment-form').addEventListener('submit', function(event) {
     event.preventDefault();
